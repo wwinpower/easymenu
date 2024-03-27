@@ -208,7 +208,40 @@ const Products = () => {
                                     <p className="product-modal__desc">{product.description.ru}</p>
                                 </div>
 
-                                <div className="product-modal__modifiers"></div>
+                                <div className="modifiers">
+                                    <div className="item">
+                                        <div className="item__header">
+                                            <h2>Добавить к пицце</h2>
+
+                                            <button>Clear</button>
+                                        </div>
+
+                                       <div className="item__content">
+                                           <ul>
+                                               <li>
+                                                   <div><input type="checkbox"/> <label>Бекон копченый 40 гр</label></div>
+
+                                                   <span>50 ֏</span>
+                                               </li>
+                                               <li>
+                                                   <div><input type="checkbox"/> <label>Бекон копченый 40 гр</label></div>
+
+                                                   <span>50 ֏</span>
+                                               </li>
+                                               <li>
+                                                   <div><input type="checkbox"/> <label>Бекон копченый 40 гр</label></div>
+
+                                                   <span>50 ֏</span>
+                                               </li>
+                                               <li>
+                                                   <div><input type="checkbox"/> <label>Бекон копченый 40 гр</label></div>
+
+                                                   <span>50 ֏</span>
+                                               </li>
+                                           </ul>
+                                       </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div className="product-modal__action">
@@ -218,7 +251,7 @@ const Products = () => {
                                     <span>+</span>
                                 </div>
 
-                                <button className="btn btn-blue btn-add">Добавить <span>{product.price.rub}</span></button>
+                                <button className="btn btn-blue btn-add">Добавить <span>{product.price.rub} ֏</span></button>
                             </div>
                         </div>
 

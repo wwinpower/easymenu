@@ -16,6 +16,10 @@ a {
   text-decoration: none;
 }
 
+ul {
+  list-style: none;
+}
+
 .wrapper {
   max-width: 480px;
   margin: 0 auto;
@@ -337,7 +341,7 @@ footer {
       transition: 0.2s;
       top: 100%;
 
-      &-active{
+      &-active {
         top: 15%;
       }
 
@@ -465,4 +469,38 @@ footer {
     }
   }
 
+}
+
+.modifiers {
+  padding: 40px 0;
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+
+      div {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+    }
+  }
 }
