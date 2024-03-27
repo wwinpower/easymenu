@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
 import {PiCaretDownLight} from "react-icons/pi";
+import Modifier from "../../components/Modifier";
 
 const Products = () => {
     const {categoryId} = useParams();
     const [product, setProduct] = useState(null);
     const [toggleTab, setToggleTab] = useState(false);
+    let [count, setCount] = useState(0)
 
     const units = [
         {
@@ -66,6 +68,7 @@ const Products = () => {
                             price: 20,
                             default: false,
                             included: true,
+                            value: 40,
                             units: {
                                 id: "1",
                                 name: {ru: "Грамм", am: "Գրամ", eng: "Grams"},
@@ -78,6 +81,7 @@ const Products = () => {
                             price: 30,
                             default: false,
                             included: true,
+                            value: 20,
                             units: {
                                 id: "1",
                                 name: {ru: "Грамм", am: "Գրամ", eng: "Grams"},
@@ -90,6 +94,7 @@ const Products = () => {
                             price: 40,
                             default: false,
                             included: true,
+                            value: 20,
                             units: {
                                 id: "1",
                                 name: {ru: "Грамм", am: "Գրամ", eng: "Grams"},
@@ -110,7 +115,8 @@ const Products = () => {
                     options: [
                         {
                             id: "1",
-                            name: {ru: "20", am: "20", eng: "20"},
+                            name: {ru: "", am: "", eng: ""},
+                            value: 20,
                             price: 20,
                             default: true,
                             included: true,
@@ -122,7 +128,8 @@ const Products = () => {
                         },
                         {
                             id: "2",
-                            name: {ru: "30", am: "30", eng: "30"},
+                            name: {ru: "", am: "", eng: ""},
+                            value: 30,
                             price: 40,
                             default: false,
                             included: true,
@@ -133,8 +140,9 @@ const Products = () => {
                             }
                         },
                         {
-                            id: "1",
-                            name: {ru: "20", am: "20", eng: "20"},
+                            id: "3",
+                            name: {ru: "", am: "", eng: ""},
+                            value: 20,
                             price: 20,
                             default: false,
                             included: true,
@@ -156,7 +164,7 @@ const Products = () => {
 
         setProduct(item);
 
-        setTimeout(()=>{
+        setTimeout(() => {
             setToggleTab(!toggleTab)
         }, 100)
     }
@@ -165,7 +173,7 @@ const Products = () => {
     const handleCloseModal = () => {
         setToggleTab(!toggleTab)
 
-        setTimeout(()=>{
+        setTimeout(() => {
             setProduct(null);
         }, 100)
     }
@@ -194,7 +202,7 @@ const Products = () => {
                     <div className="product-modal">
                         <div className={`product-modal__container ${toggleTab ? "product-modal__container-active" : ""}`}>
                             <div className="product-modal__close">
-                                <button onClick={handleCloseModal}><PiCaretDownLight /></button>
+                                <button onClick={handleCloseModal}><PiCaretDownLight/></button>
                             </div>
                             <div className="parallax">
 
@@ -209,49 +217,48 @@ const Products = () => {
                                 </div>
 
                                 <div className="modifiers">
-                                    <div className="item">
-                                        <div className="item__header">
-                                            <h2>Добавить к пицце</h2>
+                                    {
+                                        product && product.modifiers.map(item => (
+                                            <div className="item">
+                                                <div className="item__header">
+                                                    <h2>{item.name.ru}</h2>
 
-                                            <button>Clear</button>
-                                        </div>
+                                                    <button>Clear</button>
+                                                </div>
+                                                <div className="item__content">
+                                                    {/*<ul>*/}
+                                                    {/*    {*/}
+                                                    {/*        item.options && item.options.map(option => (*/}
+                                                    {/*            <li>*/}
+                                                    {/*                <label><input type="checkbox"/> {option?.name?.ru || ""} {option?.value || ""} {option?.units?.name.ru || ""}</label>*/}
 
-                                       <div className="item__content">
-                                           <ul>
-                                               <li>
-                                                   <div><input type="checkbox"/> <label>Бекон копченый 40 гр</label></div>
+                                                    {/*                <span> {option?.price || ""} ֏</span>*/}
+                                                    {/*            </li>*/}
+                                                    {/*        ))*/}
+                                                    {/*    }*/}
+                                                    {/*</ul>*/}
 
-                                                   <span>50 ֏</span>
-                                               </li>
-                                               <li>
-                                                   <div><input type="checkbox"/> <label>Бекон копченый 40 гр</label></div>
-
-                                                   <span>50 ֏</span>
-                                               </li>
-                                               <li>
-                                                   <div><input type="checkbox"/> <label>Бекон копченый 40 гр</label></div>
-
-                                                   <span>50 ֏</span>
-                                               </li>
-                                               <li>
-                                                   <div><input type="checkbox"/> <label>Бекон копченый 40 гр</label></div>
-
-                                                   <span>50 ֏</span>
-                                               </li>
-                                           </ul>
-                                       </div>
-                                    </div>
+                                                    <ul>
+                                                        {
+                                                            item.options && item.options.map(option => <Modifier option={option}/>)
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
                                 </div>
                             </div>
 
                             <div className="product-modal__action">
                                 <div className="product__count">
-                                    <span>-</span>
-                                    <input type="text" value="1"/>
-                                    <span>+</span>
+                                    <span onClick={() => count > 1 && setCount(count -= 1)}>-</span>
+                                    <input type="text" value={count}/>
+                                    <span onClick={() => setCount(count += 1)}>+</span>
                                 </div>
 
-                                <button className="btn btn-blue btn-add">Добавить <span>{product.price.rub} ֏</span></button>
+                                <button className="btn btn-blue btn-add">Добавить <span>{count * product.price.rub} ֏</span>
+                                </button>
                             </div>
                         </div>
 

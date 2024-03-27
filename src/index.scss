@@ -409,7 +409,7 @@ footer {
 
     &__content {
       height: 600px;
-      background: #ffffff90;
+      background: rgb(255 255 255 / 80%);
       -webkit-backdrop-filter: blur(20px);
       backdrop-filter: blur(20px);
       padding: 16px;
@@ -428,7 +428,7 @@ footer {
 
     &__desc {
       font-size: 14px;
-      color: #999;
+      color: #707070;
     }
 
     &__action {
@@ -473,6 +473,42 @@ footer {
 
 .modifiers {
   padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  &__checkbox {
+    border: 2px solid #cccccc;
+    width: 18px;
+    height: 18px;
+    border-radius: 2px;
+    background: none;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      display: block;
+    }
+
+    &-active {
+      border: 2px solid $main-btn-bg;
+      color: $main-btn-bg;
+    }
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+  }
 
   .item {
     display: flex;
@@ -483,6 +519,11 @@ footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      h2 {
+        font-size: 16px;
+        font-weight: 600;
+      }
     }
 
 
@@ -496,10 +537,14 @@ footer {
       display: flex;
       justify-content: space-between;
 
-      div {
+      & > div {
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: 16px;
+      }
+
+      span {
+        color: #707070;
       }
     }
   }
