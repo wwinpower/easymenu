@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
-import {PiCaretDownLight} from "react-icons/pi";
-import Modifier from "../../components/Modifier";
+import {PiArrowCounterClockwise, PiArrowCounterClockwiseBold, PiCaretDownLight} from "react-icons/pi";
+import ModifierMultiple from "../../components/ModifierMultiple";
+import ModifierSingle from "../../components/ModifierSingle";
+import {BsCartX} from "react-icons/bs";
 
 const Products = () => {
     const {categoryId} = useParams();
@@ -41,9 +43,9 @@ const Products = () => {
                 eng: "Pizza Burger"
             },
             price: {
-                amd: 1000,
-                usd: 5,
-                rub: 200
+                amd: 3500,
+                usd: 9,
+                rub: 1000
             },
             description: {
                 ru: "Сыр Моцарелла, фарш говяжий, лук красный, сыр Чеддер, помидоры, соус BBQ, соус томатный, огурцы маринованные",
@@ -67,7 +69,7 @@ const Products = () => {
                             id: "1",
                             name: {ru: "Сыр", am: "Պանիր", eng: "Cheese"},
                             price: {
-                                amd: 1000,
+                                amd: 250,
                                 usd: 5,
                                 rub: 200
                             },
@@ -85,7 +87,7 @@ const Products = () => {
                             id: "2",
                             name: {ru: "Грибы", am: "Սունկ", eng: "Mushrooms"},
                             price: {
-                                amd: 1000,
+                                amd: 300,
                                 usd: 5,
                                 rub: 200
                             },
@@ -103,7 +105,7 @@ const Products = () => {
                             id: "3",
                             name: {ru: "Колбаса", am: "Երշիկ", eng: "Sausage"},
                             price: {
-                                amd: 1000,
+                                amd: 200,
                                 usd: 5,
                                 rub: 200
                             },
@@ -134,13 +136,13 @@ const Products = () => {
                             name: {ru: "", am: "", eng: ""},
                             value: 20,
                             price: {
-                                amd: 1000,
-                                usd: 5,
-                                rub: 200
+                                amd: 0,
+                                usd: 0,
+                                rub: 0
                             },
                             default: true,
                             included: true,
-                            count: 0,
+                            selected: true,
                             units: {
                                 id: "4",
                                 name: {ru: "см", am: "սմ", eng: "cm"},
@@ -158,7 +160,7 @@ const Products = () => {
                             },
                             default: false,
                             included: true,
-                            count: 0,
+                            selected: false,
                             units: {
                                 id: "4",
                                 name: {ru: "см", am: "սմ", eng: "cm"},
@@ -168,15 +170,15 @@ const Products = () => {
                         {
                             id: "3",
                             name: {ru: "", am: "", eng: ""},
-                            value: 20,
+                            value: 40,
                             price: {
-                                amd: 1000,
+                                amd: 1500,
                                 usd: 5,
                                 rub: 200
                             },
                             default: false,
                             included: true,
-                            count: 0,
+                            selected: false,
                             units: {
                                 id: "4",
                                 name: {ru: "см", am: "սմ", eng: "cm"},
@@ -212,11 +214,11 @@ const Products = () => {
 
     const incrementModifier = (productId, modifierId, optionId) => {
         let data = products.map(product => {
-            if(product.id === productId){
+            if (product.id === productId) {
                 product.modifiers = product.modifiers.map(modifier => {
-                    if(modifier.id === modifierId){
+                    if (modifier.id === modifierId) {
                         modifier.options = modifier.options.map(option => {
-                            if(option.id === optionId){
+                            if (option.id === optionId) {
                                 option.count += 1;
                             }
 
@@ -236,11 +238,11 @@ const Products = () => {
 
     const decrementModifier = (productId, modifierId, optionId) => {
         let data = products.map(product => {
-            if(product.id === productId){
+            if (product.id === productId) {
                 product.modifiers = product.modifiers.map(modifier => {
-                    if(modifier.id === modifierId){
+                    if (modifier.id === modifierId) {
                         modifier.options = modifier.options.map(option => {
-                            if(option.id === optionId){
+                            if (option.id === optionId) {
                                 option.count -= 1;
                             }
 
@@ -258,9 +260,37 @@ const Products = () => {
         setProducts(data)
     }
 
+
+    const selectedModifier = (productId, modifierId, optionId) => {
+        let data = products.map(product => {
+            if (product.id === productId) {
+                product.modifiers = product.modifiers.map(modifier => {
+                    if (modifier.id === modifierId) {
+                        modifier.options = modifier.options.map(option => {
+                            option.selected = false;
+
+                            if (option.id === optionId) {
+                                option.selected = true;
+                            }
+
+                            return option;
+                        })
+                    }
+
+                    return modifier;
+                })
+            }
+
+            return product;
+        })
+
+        setProducts(data)
+    }
+
+
     const incrementCount = (productId) => {
         let data = products.map(product => {
-            if(product.id === productId){
+            if (product.id === productId) {
                 product.count += 1;
             }
 
@@ -272,7 +302,7 @@ const Products = () => {
 
     const decrementCount = (productId) => {
         let data = products.map(product => {
-            if(product.id === productId){
+            if (product.id === productId) {
                 product.count -= 1;
             }
 
@@ -286,15 +316,26 @@ const Products = () => {
 
         let sum = products.reduce((acc, current) => {
             console.log(acc, current)
-                if(current.id === productId){
-                    current.modifiers && current.modifiers.map(modifier => {
+            if (current.id === productId) {
+                current.modifiers && current.modifiers.map(modifier => {
+
+                    if (modifier.type === "multiple") {
                         modifier.options && modifier.options.map(option => {
                             acc += (option.price[currency] * option.count)
                         })
-                    })
-                }
+                    }
 
-                return acc;
+                    if (modifier.type === "single") {
+                        modifier.options && modifier.options.map(option => {
+                            if (option.selected) {
+                                acc += option.price[currency]
+                            }
+                        })
+                    }
+                })
+            }
+
+            return acc;
         }, 0)
 
         return sum;
@@ -302,14 +343,28 @@ const Products = () => {
 
     const clearModifier = (productId, modifierId) => {
         let data = products.map(product => {
-            if(product.id === productId){
+            if (product.id === productId) {
                 product.modifiers = product.modifiers.map(modifier => {
-                    if(modifier.id === modifierId){
-                        modifier.options = modifier.options.map(option => {
-                            option.count = 0;
+                    if (modifier.id === modifierId) {
+                        if (modifier.type === "multiple") {
+                            modifier.options = modifier.options.map(option => {
+                                option.count = 0;
 
-                            return option;
-                        })
+                                return option;
+                            })
+                        }
+
+                        if (modifier.type === "single") {
+                            modifier.options = modifier.options.map((option, index) => {
+                                option.selected = false;
+
+                                if(index === 0){
+                                    option.selected = true;
+                                }
+
+                                return option;
+                            })
+                        }
                     }
 
                     return modifier;
@@ -368,12 +423,27 @@ const Products = () => {
                                                 <div className="item__header">
                                                     <h2>{item.name.ru}</h2>
 
-                                                    <button onClick={() => clearModifier(product.id, item.id)}>Clear</button>
+                                                    <PiArrowCounterClockwiseBold  onClick={() => clearModifier(product.id, item.id)} className="item__header_icon"/>
+
                                                 </div>
                                                 <div className="item__content">
                                                     <ul>
                                                         {
-                                                            item.options && item.options.map(option => <Modifier key={option.id} productId={product.id} modifierId={item.id} option={option} incrementModifier={incrementModifier} decrementModifier={decrementModifier}/>)
+                                                            item.options && item.options.map(option => item.type === "multiple" ?
+                                                                <ModifierMultiple
+                                                                    key={option.id}
+                                                                    productId={product.id}
+                                                                    modifierId={item.id}
+                                                                    option={option}
+                                                                    incrementModifier={incrementModifier}
+                                                                    decrementModifier={decrementModifier}
+                                                                /> : <ModifierSingle
+                                                                    key={option.id}
+                                                                    productId={product.id}
+                                                                    modifierId={item.id}
+                                                                    option={option}
+                                                                    selectedModifier={selectedModifier}
+                                                                />)
                                                         }
                                                     </ul>
                                                 </div>
@@ -390,7 +460,8 @@ const Products = () => {
                                     <span onClick={() => incrementCount(product.id)}>+</span>
                                 </div>
 
-                                <button className="btn btn-blue btn-add">Добавить <span>{(product.count * product.price.rub) + getSum(product.id, "amd")} ֏</span>
+                                <button
+                                    className="btn btn-blue btn-add">Добавить <span>{(product.count * product.price.amd) + getSum(product.id, "amd")} ֏</span>
                                 </button>
                             </div>
                         </div>
