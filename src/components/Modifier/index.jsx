@@ -1,18 +1,16 @@
 import React, {useState} from 'react';
 
-const Modifier = ({option}) => {
-    let [count, setCount] = useState(0);
-
+const Modifier = ({productId, modifierId, option, decrementModifier, incrementModifier}) => {
     return (
         <li>
               <div>
                   <div className="modifiers__action">
-                      <button  onClick={()=>count === 0 ? setCount(count+=1) :  setCount(count-=1)} className={`modifiers__checkbox ${count > 0 ? "modifiers__checkbox-active" : ""}`}>−</button>
+                      <button  onClick={()=>option.count === 0 ? incrementModifier(productId, modifierId, option.id) :  decrementModifier(productId, modifierId, option.id)} className={`modifiers__checkbox ${option.count > 0 ? "modifiers__checkbox-active" : ""}`}>−</button>
                       {
-                          count > 0 && (
+                          option.count > 0 && (
                               <div>
-                                  <span>x{count}</span>
-                                  <button className={"modifiers__checkbox modifiers__checkbox-active"}  onClick={()=>setCount(count+=1)}>+</button>
+                                  <span>x{option.count}</span>
+                                  <button className={"modifiers__checkbox modifiers__checkbox-active"}  onClick={()=>incrementModifier(productId, modifierId, option.id)}>+</button>
                               </div>
                           )
                       }
@@ -21,7 +19,7 @@ const Modifier = ({option}) => {
                   <p>{option?.name?.ru || ""} {option?.value || ""} {option?.units?.name.ru || ""}</p>
               </div>
 
-            <span> {count * option?.price || 0} ֏</span>
+            <span>+ {option.count * option?.price.amd || 0} ֏</span>
         </li>
     );
 };
