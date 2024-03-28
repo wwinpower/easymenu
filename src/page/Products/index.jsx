@@ -456,7 +456,7 @@ const Products = () => {
                             <div className="product-modal__action">
                                 <div className="product__count">
                                     <span onClick={() => product.count > 1 && decrementCount(product.id)}>-</span>
-                                    <input type="text" defaultValue={product.count}/>
+                                    <input type="text" value={product.count}/>
                                     <span onClick={() => incrementCount(product.id)}>+</span>
                                 </div>
 
