@@ -61,7 +61,11 @@ const ProductModal = ({product}) => {
                 <div className="product-modal__content">
                     <div className="product-modal__info">
                         <h2 className="product-modal__title">{product.name.ru}</h2>
-                        <p className="product-modal__desc">{product.description.ru}</p>
+                        <p className="product-modal__desc">
+                            {
+                                product.included && product.included.map((item, index) => product.included.length - 1  === index ? `${item.name.ru}.` : `${item.name.ru},`)
+                            }
+                        </p>
                     </div>
 
                     <div className="modifiers">

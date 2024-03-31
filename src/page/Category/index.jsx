@@ -50,7 +50,6 @@ const Category = ({data}) => {
                                 <CategoryItem key={item.id} item={item}/>
                             ))
                         }
-
                     </div>
                 </div>
             </div>

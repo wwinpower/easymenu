@@ -59,7 +59,7 @@ const productsSlice = createSlice({
             state.product.modifiers = state.product.modifiers.map(modifier => {
                 if (modifier.id === modifierId) {
                     modifier.options = modifier.options.map(option => {
-                        if (option.id === optionId) {
+                        if (option.id === optionId && option.maxCount >= option.count + 1) {
                             option.count += 1;
                         }
 
@@ -187,7 +187,7 @@ const productsSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             });
-    },
+    }
 });
 
 export const {

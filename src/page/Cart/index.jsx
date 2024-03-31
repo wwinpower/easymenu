@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {fetchProductById} from "../../store/asyncAction/productAction";
 import {openProductInCart, toggleModal} from "../../store/features/productSlice";
@@ -19,6 +19,12 @@ const Cart = () => {
             dispatch(toggleModal());
         }, 200)
     }
+
+
+    const totalPrice = useMemo(() => {
+        if (!cart) return 0;
+        return cart.reduce((acc, crr) => acc + (crr.count * (crr.price.amd + crr.sum)), 0);
+    }, [cart]);
 
     return (
         <>
@@ -47,7 +53,7 @@ const Cart = () => {
                                                     ))
                                                 }
 
-                                                if(modifier.type === "single"){
+                                                if (modifier.type === "single") {
                                                     return modifier.options && modifier.options.map(option => (
                                                         option.selected &&
                                                         <p key={product.cartId + option.id}>{option.value} {option.units.name.ru}</p>
@@ -67,10 +73,18 @@ const Cart = () => {
                 </ul>
 
                 <div className="cart__footer">
-                    <h3><span>Сумма</span> <span>1400 ֏</span></h3>
-                    <h4><span>Итог</span> <span>1400 ֏</span></h4>
+                    <h3>
+                        <span>Сумма</span>
+                        <span>{totalPrice} ֏</span>
+                    </h3>
+                    <h4>
+                        <span>Итог</span>
+                        <span>{totalPrice} ֏</span>
+                    </h4>
                 </div>
             </div>
+
+            {totalPrice > 0 && <button className="btn btn-blue btn-next">Далее <span>{totalPrice} ֏</span></button>}
 
             {
                 product && <CartModal product={product}/>
