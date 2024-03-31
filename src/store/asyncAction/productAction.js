@@ -1,17 +1,16 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
 import data from './products.json'
+import axios from "axios";
 
 // const baseURL = "https://easymenu-backend.vercel.app";
-
+const instance = axios.create({
+    baseURL: "https://easymenu-backend.vercel.app",
+});
 export const fetchProductsByCategory = createAsyncThunk(
     "products/fetchProductsByCategory",
     async (categoryId, { rejectWithValue }) => {
         try {
-            // let response = await fetch(`./products.json`);
-
-            // if (!response.ok) {
-            //     throw new Error('Failed to fetch products');
-            // }
+           let {data} =  await instance.get(`/products/${categoryId}`);
 
             return data
         } catch (err) {
@@ -24,11 +23,11 @@ export const fetchProductById = createAsyncThunk(
     "products/fetchProductById",
     async (productId, { rejectWithValue }) => {
         try {
-            const response = await fetch(`https://easymenu-backend.vercel.app/product/${productId}`);
+            let {data} =  await instance.get(`https://easymenu-backend.vercel.app/product/${productId}`);
             // if (!response.ok) {
             //     throw new Error('Failed to fetch product by id');
             // }
-            return await response.json();
+            return data;
         } catch (err) {
             return rejectWithValue(err.message);
         }
