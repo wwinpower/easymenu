@@ -17,7 +17,7 @@ const Cart = () => {
 
         setTimeout(() => {
             dispatch(toggleModal());
-        }, 200)
+        }, 500)
     }
 
 

@@ -22,7 +22,7 @@ const Products = () => {
 
         setTimeout(() => {
             dispatch(toggleModal());
-        }, 200)
+        }, 500)
     }
 
     return (
