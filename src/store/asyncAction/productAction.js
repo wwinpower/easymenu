@@ -8,9 +8,9 @@ export const fetchProductsByCategory = createAsyncThunk(
         try {
             let response = await fetch(`${baseURL}/products/${categoryId}`);
 
-            if (!response.ok) {
-                throw new Error('Failed to fetch products');
-            }
+            // if (!response.ok) {
+            //     throw new Error('Failed to fetch products');
+            // }
 
             return await response.json();
         } catch (err) {
@@ -24,9 +24,9 @@ export const fetchProductById = createAsyncThunk(
     async (productId, { rejectWithValue }) => {
         try {
             const response = await fetch(`${baseURL}/product/${productId}`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch product by id');
-            }
+            // if (!response.ok) {
+            //     throw new Error('Failed to fetch product by id');
+            // }
             return await response.json();
         } catch (err) {
             return rejectWithValue(err.message);
