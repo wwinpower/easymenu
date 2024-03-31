@@ -1,7 +1,17 @@
 import React from 'react';
 import {PiRadioButtonFill, PiRecordLight} from "react-icons/pi";
+import {productSum, selectModifier} from "../../store/features/productSlice";
+import {useDispatch} from "react-redux";
 
-const ModifierSingle = ({productId, modifierId, option, selectedModifier}) => {
+const ModifierSingle = ({modifierId, option}) => {
+    const dispatch = useDispatch();
+
+    const selectedModifier = (modifierId, optionId) => {
+        dispatch(selectModifier({modifierId, optionId}));
+
+        dispatch(productSum({currency: "amd"}))
+    }
+
     return (
         <li>
             <div>
@@ -10,11 +20,11 @@ const ModifierSingle = ({productId, modifierId, option, selectedModifier}) => {
                         option.selected
                             ? <PiRadioButtonFill
                                 className={`modifiers__checkbox ${option.selected ? "modifiers__checkbox-active" : ""}`}
-                                onClick={() => selectedModifier(productId, modifierId, option.id)}
+                                onClick={() => selectedModifier(modifierId, option.id)}
                             />
                             : <PiRecordLight
                                 className={`modifiers__checkbox ${option.selected ? "modifiers__checkbox-active" : ""}`}
-                                onClick={() => selectedModifier(productId, modifierId, option.id)}
+                                onClick={() => selectedModifier(modifierId, option.id)}
                             />
                     }
 

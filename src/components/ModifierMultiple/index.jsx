@@ -1,7 +1,30 @@
 import React from 'react';
-import {PiMinusSquare, PiPlusLight, PiPlusSquareFill, PiPlusSquareLight} from "react-icons/pi";
+import {PiMinusSquare,PiPlusSquareLight} from "react-icons/pi";
+import {decModifier, incModifier, productSum} from "../../store/features/productSlice";
+import {useDispatch} from "react-redux";
 
-const ModifierMultiple = ({productId, modifierId, option, decrementModifier, incrementModifier}) => {
+const ModifierMultiple = ({modifierId, option}) => {
+    const dispatch = useDispatch();
+
+    const incrementModifier = (modifierId, optionId) => {
+        dispatch(incModifier({
+            modifierId,
+            optionId
+        }));
+
+        dispatch(productSum({currency: "amd"}))
+    };
+
+    const decrementModifier = (modifierId, optionId) => {
+        dispatch(decModifier({
+            modifierId,
+            optionId
+        }));
+
+        dispatch(productSum({currency: "amd"}))
+    }
+
+
     return (
         <li>
             <div>
@@ -9,16 +32,22 @@ const ModifierMultiple = ({productId, modifierId, option, decrementModifier, inc
 
                     {
                         option.count === 0 ?
-                            <PiPlusSquareLight onClick={() => incrementModifier(productId, modifierId, option.id)} className={`modifiers__checkbox ${option.count > 0 ? "modifiers__checkbox-active" : ""}`}/>:
+                            <PiPlusSquareLight
+                                onClick={() => incrementModifier(modifierId, option.id)} className={`modifiers__checkbox ${option.count > 0 ? "modifiers__checkbox-active" : ""}`}
+                            />:
 
-                            <PiMinusSquare onClick={() => decrementModifier(productId, modifierId, option.id)} className={`modifiers__checkbox ${option.count > 0 ? "modifiers__checkbox-active" : ""}`}/>
+                            <PiMinusSquare
+                                onClick={() => decrementModifier(modifierId, option.id)} className={`modifiers__checkbox ${option.count > 0 ? "modifiers__checkbox-active" : ""}`}
+                            />
                     }
                     {
                         option.count > 0 && (
                             <div>
                                 <span>x{option.count}</span>
-                                <PiPlusSquareLight className={"modifiers__checkbox modifiers__checkbox-active"}
-                                                   onClick={() => incrementModifier(productId, modifierId, option.id)}/>
+                                <PiPlusSquareLight
+                                    className={"modifiers__checkbox modifiers__checkbox-active"}
+                                    onClick={() => incrementModifier(modifierId, option.id)}
+                                />
                             </div>
                         )
                     }

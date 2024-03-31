@@ -1,26 +1,12 @@
-import React, {useState, lazy} from 'react';
-import {motion} from "framer-motion";
+import React, {lazy} from 'react';
 
 import {Routes, Route, Link} from "react-router-dom";
 import Layout from "./page/Layout";
-const Category = lazy(() => import("./page/Category"))
-const Cart = lazy(() => import("./page/Cart"))
-const Products = lazy(() => import("./page/Products"))
-const Subcategory = lazy(() => import("./page/Subcategory"))
+const Category = lazy(() => import("./page/Category"));
+const Cart = lazy(() => import("./page/Cart"));
+const Products = lazy(() => import("./page/Products"));
+const Subcategory = lazy(() => import("./page/Subcategory"));
 
-
-const PageTransition = ({ children }) => {
-    return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-        >
-            {children}
-        </motion.div>
-    );
-};
 const App = () => {
     const categories = [
         {

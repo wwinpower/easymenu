@@ -4,8 +4,10 @@ import Flicking from "@egjs/react-flicking";
 import "@egjs/react-flicking/dist/flicking.css";
 import "@egjs/react-flicking/dist/flicking-inline.css";
 import {Link, Outlet} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const Layout = () => {
+    const cart = useSelector((state) => state.products.cart);
     const [isSearch, setIsSearch] = useState(false);
 
     return (
@@ -25,7 +27,7 @@ const Layout = () => {
                     <Link to="/" className="navbar__logo fs-18"><span>Easy</span>Menu</Link>
 
                     <button className="btn btn-link btn-count">
-                        <Link to="/cart" data-count="2"><PiShoppingCartLight className="fs-22"/></Link>
+                        <Link to="/cart" data-count={cart.length}><PiShoppingCartLight className="fs-22"/></Link>
                     </button>
                 </div>
             </nav>

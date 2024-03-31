@@ -91,6 +91,14 @@ ul {
     border-radius: 16px;
   }
 
+  &-red {
+    background-color: #fdf0f1;
+    box-shadow: 0 0 0 #fff;
+    color: #eb4253;
+    border-radius: 16px;
+    transition: .2s;
+  }
+
   &-add {
     padding: 8px 16px;
     display: flex;
@@ -109,10 +117,30 @@ ul {
       border-radius: 8px;
     }
   }
+
+  &-remove {
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+
+
+    span {
+      font-size: 12px;
+      font-weight: 500;
+      display: inline-block;
+      padding: 6px 8px;
+      border-radius: 8px;
+      color: #eb4253;
+      background: #fbdfe1;
+    }
+  }
 }
 
 .fs {
-  @for $size from 12 through 24 {
+  @for $size from 8 through 24 {
     &-#{$size} {
       font-size: #{$size}px;
     }
@@ -408,7 +436,7 @@ footer {
     }
 
     &__content {
-      height: 600px;
+      //height: 600px;
       background: rgb(255 255 255 / 80%);
       -webkit-backdrop-filter: blur(20px);
       backdrop-filter: blur(20px);
@@ -545,3 +573,97 @@ footer {
     }
   }
 }
+
+.cart {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .list {
+    display: flex;
+    flex-direction: column;
+
+    &__item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      border-bottom: 1px solid #f4f4f4;
+      padding: 8px 0;
+
+      &_info {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+
+        h2 {
+          font-size: 16px;
+          font-weight: bold;
+          color: $main-font-color;
+        }
+
+        img {
+          width: 60px;
+          height: 60px;
+          object-fit: cover;
+          border-radius: 16px;
+        }
+
+        p {
+          font-size: 12px;
+          color: $second-font-color;
+        }
+      }
+
+      &_count {
+        display: flex;
+        align-items: flex-start;
+        gap: 6px;
+
+        & span:first-child {
+          font-size: 14px;
+        }
+
+        & span:last-child {
+          color: $second-font-color;
+        }
+      }
+
+      &_price {
+        span {
+          font-size: 14px;
+          color: $second-font-color;
+        }
+      }
+    }
+  }
+
+  &__footer {
+    padding: 32px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    h3 {
+      display: flex;
+      justify-content: space-between;
+
+      span {
+        color: $second-font-color;
+        font-weight: 500;
+        font-size: 16px;
+      }
+    }
+
+    h4 {
+      display: flex;
+      justify-content: space-between;
+
+      span {
+        color: $main-font-color;
+        font-weight: 500;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
