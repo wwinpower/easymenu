@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
 
-const baseURL = "https://telegram-bot-416714.uc.r.appspot.com";
+const baseURL = "https://easymenu-backend.vercel.app/";
 
 export const fetchProductsByCategory = createAsyncThunk(
     "products/fetchProductsByCategory",
