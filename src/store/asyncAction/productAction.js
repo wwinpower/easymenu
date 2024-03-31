@@ -10,6 +10,7 @@ export const fetchProductsByCategory = createAsyncThunk(
     async (categoryId, { rejectWithValue }) => {
         try {
             const response = await instance.get(`/products/${categoryId}`);
+            console.log(response)
             return response.data;
         } catch (err) {
             return rejectWithValue({ data: [], error: err.message });
