@@ -1,4 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
+import data from './products.json'
 
 // const baseURL = "https://easymenu-backend.vercel.app";
 
@@ -6,13 +7,13 @@ export const fetchProductsByCategory = createAsyncThunk(
     "products/fetchProductsByCategory",
     async (categoryId, { rejectWithValue }) => {
         try {
-            let response = await fetch(`./products.json`);
+            // let response = await fetch(`./products.json`);
 
             // if (!response.ok) {
             //     throw new Error('Failed to fetch products');
             // }
 
-            return response
+            return data
         } catch (err) {
             return rejectWithValue([], err);
         }
