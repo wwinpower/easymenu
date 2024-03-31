@@ -23,7 +23,7 @@ export const fetchProductById = createAsyncThunk(
     "products/fetchProductById",
     async (productId, { rejectWithValue }) => {
         try {
-            let {data} =  await instance.get(`https://easymenu-backend.vercel.app/product/${productId}`);
+            let {data} =  await instance.get(`/product/${productId}`);
             // if (!response.ok) {
             //     throw new Error('Failed to fetch product by id');
             // }

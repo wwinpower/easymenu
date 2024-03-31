@@ -15,7 +15,7 @@ const Products = () => {
 
     useEffect(() => {
         dispatch(fetchProductsByCategory(categoryId));
-    }, [dispatch]);
+    }, []);
 
     const handleOpenModal = (id) => {
         dispatch(fetchProductById(id));
