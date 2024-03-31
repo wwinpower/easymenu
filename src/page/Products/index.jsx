@@ -3,15 +3,13 @@ import {Link, useParams} from "react-router-dom";
 import ProductModal from "../../components/ProductModal";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchProductById, fetchProductsByCategory} from "../../store/asyncAction/productAction";
-import {productClear, toggleModal} from "../../store/features/productSlice";
+import {toggleModal} from "../../store/features/productSlice";
 
 const Products = () => {
     const dispatch = useDispatch();
 
     const products = useSelector((state) => state.products.products);
     const product = useSelector((state) => state.products.product);
-    const loading = useSelector((state) => state.products.loading);
-    const error = useSelector((state) => state.products.error);
 
     const {categoryId} = useParams();
 
@@ -26,7 +24,6 @@ const Products = () => {
             dispatch(toggleModal());
         }, 200)
     }
-
 
     return (
         <>
