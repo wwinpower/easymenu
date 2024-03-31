@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
 
-const baseURL = "http://easymenu-backend.onrender.com";
+const baseURL = "https://easymenu-backend.onrender.com";
 
 export const fetchProductsByCategory = createAsyncThunk(
     "products/fetchProductsByCategory",
