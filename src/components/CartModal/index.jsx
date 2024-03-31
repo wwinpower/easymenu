@@ -51,7 +51,7 @@ const CartModal = ({product}) => {
 
         setTimeout(() => {
             dispatch(productClear());
-        }, 100)
+        }, 500)
     }
 
     const handlerChangeInput = (e) => {}

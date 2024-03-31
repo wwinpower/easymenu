@@ -12,7 +12,6 @@ const Cart = () => {
     const cart = useSelector((state) => state.products.cart);
 
     const handleOpenModal = (cartId) => {
-        console.log(cartId)
         dispatch(openProductInCart({cartId}));
 
         setTimeout(() => {

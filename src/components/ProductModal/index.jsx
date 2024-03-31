@@ -41,7 +41,7 @@ const ProductModal = ({product}) => {
 
         setTimeout(() => {
             dispatch(productClear());
-        }, 100)
+        }, 500)
     }
 
     const handlerChangeInput = (e) => {}
