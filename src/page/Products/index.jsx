@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Link, useParams} from "react-router-dom";
+import React, {useEffect} from 'react';
+import { useParams} from "react-router-dom";
 import ProductModal from "../../components/ProductModal";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchProductById, fetchProductsByCategory} from "../../store/asyncAction/productAction";
@@ -15,7 +15,7 @@ const Products = () => {
 
     useEffect(() => {
         dispatch(fetchProductsByCategory(categoryId));
-    }, []);
+    }, [categoryId, dispatch]);
 
     const handleOpenModal = (id) => {
         dispatch(fetchProductById(id));

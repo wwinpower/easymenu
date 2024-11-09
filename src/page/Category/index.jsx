@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import CategoryItem from "../../components/CategoryItem";
 import Flicking from "@egjs/react-flicking";
 

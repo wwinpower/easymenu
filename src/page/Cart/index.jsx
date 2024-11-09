@@ -1,8 +1,6 @@
 import React, {useMemo} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {fetchProductById} from "../../store/asyncAction/productAction";
 import {openProductInCart, toggleModal} from "../../store/features/productSlice";
-import ProductModal from "../../components/ProductModal";
 import CartModal from "../../components/CartModal";
 
 const Cart = () => {

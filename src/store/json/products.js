@@ -17,7 +17,7 @@ const data = [
             eng: "Mozzarella cheese, minced beef, red onion, Cheddar cheese, tomatoes, BBQ sauce, tomato sauce, pickled cucumbers"
         },
         count: 1,
-        image: "https://d9de67c9-7c80-4867-9059-316e0ef5445b.selstorage.ru/e87e352b-5887-48a2-abdd-d11974db2f14/product_images/compiled/square_large_jpeg/1-412-68888286b15edda34e48f0f5263c4a12b59b3c6c0ca98524b50ff357bc6576fa-810x810.jpeg",
+        image: "https://sushitime.club/image/sushitime/cache/catalog/bluda/pizza/burger-1000x700-1000x700.png?v=1626335523",
         modifiers: [
             {
                 id: "1",
